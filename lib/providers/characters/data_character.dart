@@ -1,15 +1,15 @@
 import './character.dart';
 
-class Data {
+class DataCharacter {
   int offset;
   int limit;
   int total;
   int count;
   List<Character> characters;
 
-  Data({this.offset, this.limit, this.total, this.count, this.characters});
+  DataCharacter({this.offset, this.limit, this.total, this.count, this.characters});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
+  factory DataCharacter.fromJson(Map<String, dynamic> json) {
     List<Character> chars = new List<Character>();
     if (json['results'] != null) {
       json['results'].forEach((v) {
@@ -17,7 +17,7 @@ class Data {
       });
     }
 
-    return Data(
+    return DataCharacter(
       offset: json['offset'],
       limit: json['limit'],
       total: json['total'],

@@ -1,16 +1,16 @@
 import './creator.dart';
 
 
-class Data {
+class DataCreator {
   int offset;
   int limit;
   int total;
   int count;
   List<Creator> creators;
 
-  Data({this.offset, this.limit, this.total, this.count, this.creators});
+  DataCreator({this.offset, this.limit, this.total, this.count, this.creators});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
+  factory DataCreator.fromJson(Map<String, dynamic> json) {
     List<Creator> chars = new List<Creator>();
     if (json['results'] != null) {
       json['results'].forEach((v) {
@@ -18,7 +18,7 @@ class Data {
       });
     }
 
-    return Data(
+    return DataCreator(
       offset: json['offset'],
       limit: json['limit'],
       total: json['total'],

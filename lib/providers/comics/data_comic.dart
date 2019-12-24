@@ -1,15 +1,15 @@
 import './comic.dart';
 
-class Data {
+class DataComic {
   int offset;
   int limit;
   int total;
   int count;
   List<Comic> comics;
 
-  Data({this.offset, this.limit, this.total, this.count, this.comics});
+  DataComic({this.offset, this.limit, this.total, this.count, this.comics});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
+  factory DataComic.fromJson(Map<String, dynamic> json) {
     List<Comic> chars = new List<Comic>();
     if (json['results'] != null) {
       json['results'].forEach((v) {
@@ -17,7 +17,7 @@ class Data {
       });
     }
 
-    return Data(
+    return DataComic(
       offset: json['offset'],
       limit: json['limit'],
       total: json['total'],
