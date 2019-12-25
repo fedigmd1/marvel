@@ -1,4 +1,4 @@
-import './comic.dart';
+import 'package:marvel/models/comics/comic.dart';
 
 class DataComic {
   int offset;
@@ -9,21 +9,17 @@ class DataComic {
 
   DataComic({this.offset, this.limit, this.total, this.count, this.comics});
 
-  factory DataComic.fromJson(Map<String, dynamic> json) {
-    List<Comic> chars = new List<Comic>();
+  DataComic.fromJson(Map<String, dynamic> json) {
+    offset = json['offset'];
+    limit = json['limit'];
+    total = json['total'];
+    count = json['count'];
     if (json['results'] != null) {
+      comics = new List<Comic>();
       json['results'].forEach((v) {
-        chars.add(new Comic.fromJson(v));
+        comics.add(new Comic.fromJson(v));
       });
     }
-
-    return DataComic(
-      offset: json['offset'],
-      limit: json['limit'],
-      total: json['total'],
-      count: json['count'],
-      comics: chars,
-    );
   }
 
   Map<String, dynamic> toJson() {

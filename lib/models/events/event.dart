@@ -1,22 +1,22 @@
-import '../../models/thumbnail.dart';
+import 'package:marvel/crypto/thumbnail.dart';
 
-class Creator {
+class Event {
   int id;
-  String fullName;
+  String title;
   String description;
   Thumbnail thumbnail;
 
-  Creator({
+  Event({
     this.id,
-    this.fullName,
+    this.title,
     this.description,
     this.thumbnail,
   });
 
-  factory Creator.fromJson(Map<String, dynamic> json) {
-    return Creator(
+  factory Event.fromJson(Map<String, dynamic> json) {
+    return Event(
         id: json['id'],
-        fullName: json['fullName'],
+        title: json['title'],
         description: json['description'],
         thumbnail: json['thumbnail'] != null
             ? Thumbnail.fromJson(json['thumbnail'])
@@ -25,7 +25,7 @@ class Creator {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
-    data['fullName'] = this.fullName;
+    data['title'] = this.title;
     data['description'] = this.description;
     return data;
   }

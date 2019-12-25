@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 50),
-           // padding: EdgeInsets.only(left: 20),
+           //httphttp padding: EdgeInsets.only(left: 20),
             child: FlatButton(
               child: Text('data'),
               color: Colors.red[200],

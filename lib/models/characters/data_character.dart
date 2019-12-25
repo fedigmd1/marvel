@@ -1,29 +1,25 @@
-import './character.dart';
+import 'package:marvel/models/characters/character.dart';
 
-class DataCharacter {
+class DataCharcter {
   int offset;
   int limit;
   int total;
   int count;
   List<Character> characters;
 
-  DataCharacter({this.offset, this.limit, this.total, this.count, this.characters});
+  DataCharcter({this.offset, this.limit, this.total, this.count, this.characters});
 
-  factory DataCharacter.fromJson(Map<String, dynamic> json) {
-    List<Character> chars = new List<Character>();
+  DataCharcter.fromJson(Map<String, dynamic> json) {
+    offset = json['offset'];
+    limit = json['limit'];
+    total = json['total'];
+    count = json['count'];
     if (json['results'] != null) {
+      characters = new List<Character>();
       json['results'].forEach((v) {
-        chars.add(new Character.fromJson(v));
+        characters.add(new Character.fromJson(v));
       });
     }
-
-    return DataCharacter(
-      offset: json['offset'],
-      limit: json['limit'],
-      total: json['total'],
-      count: json['count'],
-      characters: chars,
-    );
   }
 
   Map<String, dynamic> toJson() {
