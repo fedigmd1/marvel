@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:marvel/providers/characters_provider.dart';
 import 'package:marvel/providers/comics_provider.dart';
+import 'package:marvel/screens/comic_detail_screen.dart';
 import 'package:marvel/screens/comics_screen.dart';
 import 'package:provider/provider.dart';
-import './screens/characters_screen.dart';
+import './screens/character_detail_screen.dart';
 import './screens/creators_screen.dart';
 import './screens/events_screen.dart';
 import './screens/homepage.dart';
@@ -32,10 +33,11 @@ class MyApp extends StatelessWidget {
         ),
         home: HomePage(),
         routes: {
-          CharactersScreen.routeName: (ctx) => CharactersScreen(),
+          CharacterDetailsScreen.routeName: (ctx) => CharacterDetailsScreen(),
           ComicsScreen.routeName: (ctx) => ComicsScreen(),
           CreatorsScreen.routeName: (ctx) => CreatorsScreen(),
           EventsScreen.routeName: (ctx) => EventsScreen(),
+          ComicDetailScreen.routeName: (ctx) => ComicDetailScreen(),
         },
       ),
     );

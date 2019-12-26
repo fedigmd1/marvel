@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 
 import 'package:marvel/providers/characters_provider.dart';
 
-class CharactersScreen extends StatefulWidget {
-  static const routeName = '/characters';
+class CharacterDetailsScreen extends StatefulWidget {
+  static const routeName = '/character-detail';
 
   @override
-  _CharactersScreenState createState() => _CharactersScreenState();
+  _CharacterDetailsScreenState createState() => _CharacterDetailsScreenState();
 }
 
-class _CharactersScreenState extends State<CharactersScreen> {
+class _CharacterDetailsScreenState extends State<CharacterDetailsScreen> {
   var _isInit = true;
   var _isLoading = false;
   var data = [];

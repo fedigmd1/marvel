@@ -27,6 +27,10 @@ class ComicsProviders with ChangeNotifier {
   //   return _items.firstWhere((comic) => comic.id == id);
   // }
 
+  Comic findById(String id) {
+    return _items.firstWhere((comic) => '${comic.id}' == id);
+  }
+
   Future<void> getComics() async {
     final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
     final hash =
@@ -42,7 +46,7 @@ class ComicsProviders with ChangeNotifier {
       //   "offset": offset.toString()
       // };
       if (items.isEmpty) {
-      final String url = url1+'?'+'limit=50'+'&ts='+timestamp+'&apikey='+Keys.publicKey+'&hash='+hash;
+      final String url = url1+'?'+'limit=90'+'&ts='+timestamp+'&apikey='+Keys.publicKey+'&hash='+hash;
       final response = await http.get(url);
       final data=json.decode(response.body);
       final extractedData = ComicsResponse.fromJson(data);

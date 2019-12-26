@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:marvel/crypto/thumbnail.dart';
 
-class Comic {
+class Comic with ChangeNotifier {
   int id;
   String title;
   String description;
