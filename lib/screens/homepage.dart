@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marvel/screens/characters_screen.dart';
+import 'package:marvel/screens/comics_screen.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -30,7 +31,7 @@ class HomePage extends StatelessWidget {
               child: Text('data'),
               color: Colors.red[200],
               onPressed: () => {
-                Navigator.of(context).pushNamed(CharactersScreen.routeName),
+                Navigator.of(context).pushNamed(ComicsScreen.routeName),
               },
             ),
           ),
