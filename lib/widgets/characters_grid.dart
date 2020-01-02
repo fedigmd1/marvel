@@ -18,10 +18,10 @@ class CharactersGrid extends StatelessWidget {
         itemCount: character.length,
         itemBuilder: (ctx, i) => CharacterItem(character[i]),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: 3,
           childAspectRatio: 3 / 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15,
         ),
       ),
     );

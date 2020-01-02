@@ -31,13 +31,13 @@ class CharacterItem extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        footer: GridTileBar(
-          backgroundColor: Colors.black45,
-          title: Text(
-            character.name,
-            textAlign: TextAlign.center,
-          ),
-        ),
+        // footer: GridTileBar(
+        //   backgroundColor: Colors.black45,
+        //   title: Text(
+        //     character.name,
+        //     textAlign: TextAlign.center,
+        //   ),
+        // ),
       ),
     );
   }

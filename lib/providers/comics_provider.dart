@@ -58,7 +58,7 @@ class ComicsProviders with ChangeNotifier {
       if (items.isEmpty) {
         final String url = url1 +
             '?' +
-            'limit=20' +
+            'limit=30' +
             '&ts=' +
             timestamp +
             '&apikey=' +

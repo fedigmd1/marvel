@@ -52,7 +52,7 @@ class CharactersProviders with ChangeNotifier {
         final String url = Constraints.baseUrl +
             'comics/$idComic/characters' +
             '?' +
-            'limit=30' +
+            'limit=60' +
             '&ts=' +
             timestamp +
             '&apikey=' +
