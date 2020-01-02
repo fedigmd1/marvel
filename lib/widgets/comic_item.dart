@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:marvel/models/comics/comic.dart';
 import 'package:marvel/screens/comic_detail_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:marvel/providers/comics_provider.dart';
-import 'package:marvel/providers/characters_provider.dart';
+//import 'package:provider/provider.dart';
+// import 'package:marvel/providers/comics_provider.dart';
+//import 'package:marvel/providers/characters_provider.dart';
 
 class ComicItem extends StatelessWidget {
   final Comic comic;
@@ -11,8 +11,8 @@ class ComicItem extends StatelessWidget {
   ComicItem(this.comic);
   @override
   Widget build(BuildContext context) {
-    final comicPrv = Provider.of<ComicsProviders>(context, listen: false);
-    final character = Provider.of<CharactersProviders>(context, listen: false);
+    //final comicPrv = Provider.of<ComicsProviders>(context, listen: false);
+    //final character = Provider.of<CharactersProviders>(context, listen: false);
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -21,7 +21,7 @@ class ComicItem extends StatelessWidget {
           onTap: () {
             // comicPrv.selectComic(comic);
             // final oneComic = comicPrv.selectedComic;
-            character.setComicId(comic.id);
+            //character.setComicId(comic.id);
             Navigator.of(context).pushNamed(
               ComicDetailScreen.routeName,
               arguments: '${comic.id}',

@@ -10,7 +10,7 @@ import 'package:marvel/models/characters/characters_response.dart';
 import 'package:marvel/crypto/crypto/constraints.dart';
 
 class CharactersProviders with ChangeNotifier {
-  int _id;
+  // String _id = "";
   //final url1 = Constraints.baseUrl + 'comics/$_id/characters';
   // final itemsPerPage = 30;
   // var page = 0;
@@ -27,10 +27,10 @@ class CharactersProviders with ChangeNotifier {
     return _items.firstWhere((character) => '${character.id}' == id);
   }
 
-  void setComicId(int id) {
-    _id = id;
-    notifyListeners();
-  }
+  // void setComicId(String id) {
+  //   _id = id;
+  //   notifyListeners();
+  // }
 
   Character _selectedCharacter;
 
@@ -43,16 +43,14 @@ class CharactersProviders with ChangeNotifier {
     notifyListeners();
   }
 
-
-  Future<void> getcomicCharacters() async {
+  Future<void> getcomicCharacters(String idComic) async {
     final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
     final hash =
         Md5().execute(timestamp + Keys.privateKey + Keys.publicKey).toString();
-
-    try {
-      if (items.isEmpty) {
+    if (idComic != "" && idComic != null) {
+      try {
         final String url = Constraints.baseUrl +
-            'comics/$_id/characters' +
+            'comics/$idComic/characters' +
             '?' +
             'limit=30' +
             '&ts=' +
@@ -66,10 +64,10 @@ class CharactersProviders with ChangeNotifier {
         final extractedData = CharactersResponse.fromJson(data);
         _items = extractedData.data.characters;
         notifyListeners();
+      } catch (error) {
+        print("An error has occuried: " + error.toString());
+        throw (error);
       }
-    } catch (error) {
-      print("An error has occuried: " + error.toString());
-      throw (error);
     }
   }
 }

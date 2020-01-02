@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:marvel/providers/characters_provider.dart';
+//import 'package:marvel/models/characters/character.dart';
 
 class CharacterDetailScreen extends StatelessWidget {
   static const routeName = '/character-detail';
@@ -50,7 +51,8 @@ class CharacterDetailScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 10),
               width: double.infinity,
               child: Text(
-                loadedComicCharacters.description != null
+                (loadedComicCharacters.description != "" &&
+                        loadedComicCharacters.description != null)
                     ? loadedComicCharacters.description
                     : 'No Description',
                 textAlign: TextAlign.center,

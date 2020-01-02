@@ -11,11 +11,11 @@ import 'package:marvel/models/comics/comics_response.dart';
 
 class ComicsProviders with ChangeNotifier {
   final url1 = Constraints.baseUrl + 'comics';
-  final itemsPerPage = 10;
-  var page = 0;
-  var offset = 0;
-  var lastTotalReturnedItems = 0;
-  var searchTerm = "";
+  // final itemsPerPage = 10;
+  // var page = 0;
+  // var offset = 0;
+  // var lastTotalReturnedItems = 0;
+  // var searchTerm = "";
   List<Comic> _items = [];
 
   List<Comic> get items {

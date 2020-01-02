@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:marvel/models/characters/character.dart';
 import 'package:marvel/screens/character_detail_screen.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
-import 'package:marvel/providers/characters_provider.dart';
+// import 'package:marvel/providers/characters_provider.dart';
 
 class CharacterItem extends StatelessWidget {
-  final int id;
-  CharacterItem(this.id);
+  final Character character;
+  CharacterItem(this.character);
 
   @override
   Widget build(BuildContext context) {
-    final character = Provider.of<CharactersProviders>(context, listen: false);
+    // final character = Provider.of<CharactersProviders>(context, listen: false);
 
-    character.selectCharcters(id);
-    final onecharacter = character.selectedCharacter;
+    // character.selectCharcters(id);
+    // final onecharacter = character.selectedCharacter;
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -22,18 +23,18 @@ class CharacterItem extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pushNamed(
               CharacterDetailScreen.routeName,
-              arguments: '${onecharacter.id}',
+              arguments: '${character.id}',
             );
           },
           child: Image.network(
-            '${onecharacter.thumbnail.path}.${onecharacter.thumbnail.extension}',
+            '${character.thumbnail.path}.${character.thumbnail.extension}',
             fit: BoxFit.cover,
           ),
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black45,
           title: Text(
-            onecharacter.name,
+            character.name,
             textAlign: TextAlign.center,
           ),
         ),

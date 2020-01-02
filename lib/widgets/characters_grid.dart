@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:marvel/providers/characters_provider.dart';
 
 class CharactersGrid extends StatelessWidget {
+  // final String comicId;
+  // CharactersGrid(this.comicId);
   @override
   Widget build(BuildContext context) {
     final character = Provider.of<CharactersProviders>(context).items;
@@ -14,7 +16,7 @@ class CharactersGrid extends StatelessWidget {
         //scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.all(10.0),
         itemCount: character.length,
-        itemBuilder: (ctx, i) => CharacterItem(i),
+        itemBuilder: (ctx, i) => CharacterItem(character[i]),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 3 / 2,

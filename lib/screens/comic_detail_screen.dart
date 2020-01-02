@@ -16,14 +16,33 @@ class _ComicDetailScreenState extends State<ComicDetailScreen> {
   var _isLoading = false;
   var data = [];
 
-  @override
-  void didChangeDependencies() {
+  // @override
+  // void didChangeDependencies() {
+  //   if (_isInit) {
+  //     setState(() {
+  //       _isLoading = true;
+  //     });
+  //     final dataExtracted = Provider.of<CharactersProviders>(context);
+  //     dataExtracted.setComicId("");
+  //     dataExtracted.getcomicCharacters().then((_) {
+  //       setState(() {
+  //         _isLoading = false;
+  //         data = dataExtracted.items;
+  //       });
+  //     });
+  //   }
+  //   _isInit = false;
+
+  //   super.didChangeDependencies();
+  // }
+
+  void getcharacter(String id) {
     if (_isInit) {
       setState(() {
         _isLoading = true;
       });
       final dataExtracted = Provider.of<CharactersProviders>(context);
-      dataExtracted.getcomicCharacters().then((_) {
+      dataExtracted.getcomicCharacters(id).then((_) {
         setState(() {
           _isLoading = false;
           data = dataExtracted.items;
@@ -31,16 +50,14 @@ class _ComicDetailScreenState extends State<ComicDetailScreen> {
       });
     }
     _isInit = false;
-
-    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
     final comicId = ModalRoute.of(context).settings.arguments as String;
-    // .......(context, listen: true).find.........; by default listen is true
-    final loadedcomic = Provider.of<ComicsProviders>(context).findById(comicId);
-    //print(loadedcomic.id.toString());
+    final loadedcomic =
+        Provider.of<ComicsProviders>(context, listen: false).findById(comicId);
+    getcharacter(comicId);
 
     return Scaffold(
       appBar: AppBar(
