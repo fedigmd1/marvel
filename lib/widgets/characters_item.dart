@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:marvel/screens/comic_detail_screen.dart';
+import 'package:marvel/screens/character_detail_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'package:marvel/models/comics/comic.dart';
-//import 'package:marvel/providers/comics_provider.dart';
+import 'package:marvel/providers/characters_provider.dart';
 
-class ComicItem extends StatelessWidget {
-  // final String id;
-  // final String title;
-  // final String imageUrl;
+class CharacterItem extends StatelessWidget {
+  final int id;
+  CharacterItem(this.id);
 
-  // ProductItem(this.id, this.title, this.imageUrl);
   @override
   Widget build(BuildContext context) {
-    final comic = Provider.of<Comic>(context, listen: false);
+    final character = Provider.of<CharactersProviders>(context, listen: false);
+
+    character.selectCharcters(id);
+    final onecharacter = character.selectedCharacter;
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -21,19 +21,19 @@ class ComicItem extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed(
-              ComicDetailScreen.routeName,
-              arguments: '${comic.id}',
+              CharacterDetailScreen.routeName,
+              arguments: '${onecharacter.id}',
             );
           },
           child: Image.network(
-            '${comic.thumbnail.path}.${comic.thumbnail.extension}',
+            '${onecharacter.thumbnail.path}.${onecharacter.thumbnail.extension}',
             fit: BoxFit.cover,
           ),
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black45,
           title: Text(
-            comic.title,
+            onecharacter.name,
             textAlign: TextAlign.center,
           ),
         ),

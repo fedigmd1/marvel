@@ -1,14 +1,39 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:marvel/widgets/characters_grid.dart';
 import 'package:provider/provider.dart';
+import 'package:marvel/providers/characters_provider.dart';
 import 'package:marvel/providers/comics_provider.dart';
 
-class ComicDetailScreen extends StatelessWidget {
+class ComicDetailScreen extends StatefulWidget {
   static const routeName = '/comic-detail';
-  // final String title;
-  // final double price;
-  //ProductDetailScreen(this.title, this.price);
+
+  @override
+  _ComicDetailScreenState createState() => _ComicDetailScreenState();
+}
+
+class _ComicDetailScreenState extends State<ComicDetailScreen> {
+  var _isInit = true;
+  var _isLoading = false;
+  var data = [];
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      final dataExtracted = Provider.of<CharactersProviders>(context);
+      dataExtracted.getcomicCharacters().then((_) {
+        setState(() {
+          _isLoading = false;
+          data = dataExtracted.items;
+        });
+      });
+    }
+    _isInit = false;
+
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,19 +53,24 @@ class ComicDetailScreen extends StatelessWidget {
               height: 300,
               width: double.infinity,
               child: loadedcomic.thumbnail.path.contains('/image_not_available')
-                  ? Image.asset('assets/images/marvelA.png')
+                  ? Image.asset(
+                      'assets/images/marvelB.jpg',
+                      fit: BoxFit.cover,
+                    )
                   : Image.network(
                       '${loadedcomic.thumbnail.path}.${loadedcomic.thumbnail.extension}',
                       fit: BoxFit.cover,
                     ),
             ),
             SizedBox(height: 10),
-            Text(
-              '',
-              //'${loadedcomic.price}',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 20,
+            Container(
+              margin: EdgeInsets.only(left: 15),
+              child: Text(
+                '${loadedcomic.title}',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 20,
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -55,7 +85,12 @@ class ComicDetailScreen extends StatelessWidget {
                 softWrap: true,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
+            _isLoading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : CharactersGrid(),
           ],
         ),
       ),

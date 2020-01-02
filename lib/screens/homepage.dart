@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:marvel/screens/character_detail_screen.dart';
 import 'package:marvel/screens/comics_screen.dart';
 
 class HomePage extends StatelessWidget {

@@ -1,86 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:marvel/providers/characters_provider.dart';
 
-class CharacterDetailsScreen extends StatefulWidget {
+class CharacterDetailScreen extends StatelessWidget {
   static const routeName = '/character-detail';
 
   @override
-  _CharacterDetailsScreenState createState() => _CharacterDetailsScreenState();
-}
-
-class _CharacterDetailsScreenState extends State<CharacterDetailsScreen> {
-  var _isInit = true;
-  var _isLoading = false;
-  var data = [];
-
-  @override
-  void didChangeDependencies() {
-    if (_isInit) {
-      setState(() {
-        _isLoading = true;
-      });
-      final dataExtracted = Provider.of<CharactersProviders>(context);
-      dataExtracted.getCharacters().then((_) {
-        setState(() {
-          _isLoading = false;
-          data = dataExtracted.items;
-          print(data);
-        });
-      });
-    }
-    _isInit = false;
-
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final characterId = ModalRoute.of(context).settings.arguments as String;
+    // .......(context, listen: true).find.........; by default listen is true
+    final loadedComicCharacters =
+        Provider.of<CharactersProviders>(context).findById(characterId);
+    //print(loadedcomic.id.toString());
+
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: <Widget>[
-            Text('Marvel'),
-          ],
-        ),
+        title: Text(loadedComicCharacters.name),
       ),
-      body: Container(
-        child: _isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : InkWell(
-                child: Container(
-                  height: 400,
-                  child: Padding(
-                    padding: EdgeInsets.all(8),
-                    child: ListView.builder(
-                      itemCount: data.length,
-                      itemBuilder: (_, i) => Column(
-                        children: [
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                  height: 200,
-                                  child: Image.network(
-                                      '${data[i].thumbnail.path}.${data[i].thumbnail.extension}')),
-                              // Image.network('${data[i].thumbnail}'),
-
-                              Container(
-                                child: Text('${data[i].name}'),
-                              ),
-                            ],
-                          ),
-
-                          //data[i].imageUrl,
-                          Divider(),
-                        ],
-                      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 300,
+              width: double.infinity,
+              child: loadedComicCharacters.thumbnail.path
+                      .contains('/image_not_available')
+                  ? Image.asset(
+                      'assets/images/marvelB.jpg',
+                      fit: BoxFit.cover,
+                    )
+                  : Image.network(
+                      '${loadedComicCharacters.thumbnail.path}.${loadedComicCharacters.thumbnail.extension}',
+                      fit: BoxFit.cover,
                     ),
-                  ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              margin: EdgeInsets.only(left: 15),
+              child: Text(
+                '${loadedComicCharacters.name}',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 20,
                 ),
               ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              width: double.infinity,
+              child: Text(
+                loadedComicCharacters.description != null
+                    ? loadedComicCharacters.description
+                    : 'No Description',
+                textAlign: TextAlign.center,
+                softWrap: true,
+              ),
+            ),
+            SizedBox(height: 10),
+          ],
+        ),
       ),
     );
   }

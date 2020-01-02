@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
 
@@ -8,7 +8,6 @@ import 'package:marvel/crypto/crypto/md5.dart';
 import 'package:marvel/models/comics/comic.dart';
 import 'package:marvel/crypto/crypto/constraints.dart';
 import 'package:marvel/models/comics/comics_response.dart';
-import 'package:marvel/models/comics/data_comic.dart';
 
 class ComicsProviders with ChangeNotifier {
   final url1 = Constraints.baseUrl + 'comics';
@@ -21,6 +20,17 @@ class ComicsProviders with ChangeNotifier {
 
   List<Comic> get items {
     return [..._items];
+  }
+
+  Comic _selectedComic;
+
+  Comic get selectedComic {
+    return _selectedComic;
+  }
+
+  void selectComic(int index) {
+    _selectedComic = _items[index];
+    notifyListeners();
   }
 
   // Comic findById(String id) {
@@ -46,14 +56,22 @@ class ComicsProviders with ChangeNotifier {
       //   "offset": offset.toString()
       // };
       if (items.isEmpty) {
-      final String url = url1+'?'+'limit=90'+'&ts='+timestamp+'&apikey='+Keys.publicKey+'&hash='+hash;
-      final response = await http.get(url);
-      final data=json.decode(response.body);
-      final extractedData = ComicsResponse.fromJson(data);
-      _items=extractedData.data.comics;
-      notifyListeners();
+        final String url = url1 +
+            '?' +
+            'limit=20' +
+            '&ts=' +
+            timestamp +
+            '&apikey=' +
+            Keys.publicKey +
+            '&hash=' +
+            hash;
+        final response = await http.get(url);
+        final data = json.decode(response.body);
+        final extractedData = ComicsResponse.fromJson(data);
+        _items = extractedData.data.comics;
+        notifyListeners();
       }
-     
+
       //final extractedData = DataComic.fromJson(value);
 
       // final List<Comic> loadedComics = [];

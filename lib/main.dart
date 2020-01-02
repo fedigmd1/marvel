@@ -33,11 +33,11 @@ class MyApp extends StatelessWidget {
         ),
         home: HomePage(),
         routes: {
-          CharacterDetailsScreen.routeName: (ctx) => CharacterDetailsScreen(),
           ComicsScreen.routeName: (ctx) => ComicsScreen(),
           CreatorsScreen.routeName: (ctx) => CreatorsScreen(),
           EventsScreen.routeName: (ctx) => EventsScreen(),
           ComicDetailScreen.routeName: (ctx) => ComicDetailScreen(),
+          CharacterDetailScreen.routeName: (ctx) => CharacterDetailScreen(),
         },
       ),
     );
